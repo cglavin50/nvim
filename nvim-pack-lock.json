@@ -1,0 +1,58 @@
+{
+  "plugins": {
+    "everforest": {
+      "rev": "85a86eb62409e3ec88713bff3d1b9d7374e112e4",
+      "src": "https://github.com/sainnhe/everforest"
+    },
+    "mason-lspconfig.nvim": {
+      "rev": "67029ccdac1ef8941e13b826417bc0ffac24cc86",
+      "src": "https://github.com/mason-org/mason-lspconfig.nvim"
+    },
+    "mason-tool-installer.nvim": {
+      "rev": "443f1ef8b5e6bf47045cb2217b6f748a223cf7dc",
+      "src": "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim"
+    },
+    "mason.nvim": {
+      "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
+      "src": "https://github.com/mason-org/mason.nvim"
+    },
+    "mini.nvim": {
+      "rev": "1345d191bb3da9c7b0e977f4387c5761f9bff68d",
+      "src": "https://github.com/nvim-mini/mini.nvim",
+      "version": "'stable'"
+    },
+    "mini.trailspace": {
+      "rev": "82c4fb7d4336f8824ca6c97068932886b56326d0",
+      "src": "https://github.com/nvim-mini/mini.trailspace"
+    },
+    "nvim": {
+      "rev": "edefef779ab08ce1a4a404713e3012b0d202bd35",
+      "src": "https://github.com/catppuccin/nvim"
+    },
+    "nvim-lspconfig": {
+      "rev": "51dbf5359da86721662c87ca10eb73add973737b",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "plenary.nvim": {
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "telescope-fzf-native.nvim": {
+      "rev": "b25b749b9db64d375d782094e2b9dce53ad53a40",
+      "src": "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
+    },
+    "telescope-ui-select.nvim": {
+      "rev": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2",
+      "src": "https://github.com/nvim-telescope/telescope-ui-select.nvim"
+    },
+    "telescope.nvim": {
+      "rev": "427b576c16792edad01a92b89721d923c19ad60f",
+      "src": "https://github.com/nvim-telescope/telescope.nvim"
+    },
+    "which-key.nvim": {
+      "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
+      "src": "https://github.com/folke/which-key.nvim",
+      "version": "'main'"
+    }
+  }
+}
