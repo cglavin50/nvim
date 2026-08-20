@@ -1,0 +1,7 @@
+require("config.keymaps")
+require("config.lsp")
+require("config.navigation")
+require("config.options")
+require("config.treesitter")
+require("config.ui")
+require("config.autocomplete")
