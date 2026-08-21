@@ -12,3 +12,7 @@ Slowing porting my existing plugins over to mini.nvim as much as possible, as I 
         - Some plugins are managed here that are used WITH neovim native functionality (ex: Mason to configure LSPs)
     - `plugins/`
         - Holds general plugin configurations that don't cleanly fit into the above
+
+## Usage
+
+This config is wrapped in a nix flake so I can use it both on my personal machine (nixos), as well as any work devices (aka macos).
