@@ -7,7 +7,7 @@ require("plugins.which-key")
 
 require("plugins.dadbod")
 
-require("plugins.obsidian")
+-- require("plugins.obsidian")
 
 require("plugins/indent")
 
