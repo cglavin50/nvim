@@ -10,6 +10,8 @@ vim.pack.add({
 
 ---@type table<string, vim.lsp.Config>
 local servers = {
+  elmls = {},
+
   ts_ls = {},
 
   -- Special Lua Config, as recommended by neovim help docs
@@ -111,8 +113,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- or a suggestion from your LSP for this to activate.
     map("gra", vim.lsp.buf.code_action, "[G]oto Code [A]ction", { "n", "x" })
 
-    -- WARN: This is not Goto Definition, this is Goto Declaration.
-    --  For example, in C this would take you to the header.
     map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
     -- The following two autocommands are used to highlight references of the
