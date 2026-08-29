@@ -48,10 +48,10 @@ require("themery").setup({
       ]],
     },
     {
-      name = "Everfore Light",
+      name = "Everforest Light",
       colorscheme = "everforest",
       before = [[
-        vim.g.everforest_background = "soft"
+        vim.g.everforest_background = "medium"
         vim.opt.background = "light"
       ]],
     },
