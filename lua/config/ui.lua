@@ -26,6 +26,7 @@ vim.pack.add({
   "https://github.com/sainnhe/everforest",
   "https://github.com/catppuccin/nvim",
   "https://github.com/EdenEast/nightfox.nvim",
+  "https://github.com/nyoom-engineering/oxocarbon.nvim",
   "https://github.com/projekt0n/github-nvim-theme",
 })
 
@@ -48,10 +49,10 @@ require("themery").setup({
       ]],
     },
     {
-      name = "Everfore Light",
+      name = "Everforest Light",
       colorscheme = "everforest",
       before = [[
-        vim.g.everforest_background = "soft"
+        vim.g.everforest_background = "hard"
         vim.opt.background = "light"
       ]],
     },
@@ -72,6 +73,20 @@ require("themery").setup({
     {
       name = "Catppuccin Mocha",
       colorscheme = "catppuccin",
+      before = [[
+        vim.o.background = "dark"
+      ]],
+    },
+    {
+      name = "OXO Carbon Light",
+      colorscheme = "oxocarbon",
+      before = [[
+        vim.o.background = "light"
+      ]],
+    },
+    {
+      name = "OXO Carbon Dark",
+      colorscheme = "oxocarbon",
       before = [[
         vim.o.background = "dark"
       ]],

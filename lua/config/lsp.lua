@@ -55,6 +55,7 @@ local formatters = {
   "eslint",
   "eslint_d",
   "prettierd",
+  "tailwindcss-language-server",
 
   -- Lua
   "stylua",
