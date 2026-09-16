@@ -24,8 +24,8 @@ vim.diagnostic.config({
     end,
   },
 })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
+vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist, { desc = "Open [D]iagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>dl", vim.diagnostic.open_float, { desc = "Show [D]iagnostics for this [L]ine" })
 
 vim.keymap.set("n", "j", function()
   return vim.v.count == 0 and "gj" or "j"
