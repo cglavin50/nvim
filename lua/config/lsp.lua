@@ -16,6 +16,8 @@ local servers = {
 
   ts_ls = {},
 
+  svelte = {},
+
   -- Special Lua Config, as recommended by neovim help docs
   lua_ls = {
     on_init = function(client)
@@ -88,6 +90,7 @@ require("conform").setup({
     typescriptreact = { "prettierd" },
     javascriptreact = { "prettierd" },
     javascript = { "prettierd" },
+    svelte = { "prettierd" },
     nix = { "alejandra" },
   },
 
