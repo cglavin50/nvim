@@ -15,4 +15,61 @@ Slowing porting my existing plugins over to mini.nvim as much as possible, as I 
 
 ## Usage
 
-This config is wrapped in a nix flake so I can use it both on my personal machine (nixos), as well as any work devices (aka macos).
+This repo is a plain git checkout consumed by two things:
+
+1. **`vim.pack`** (native, built into Neovim 0.12+) installs/pins plugins by
+   itself, writing `nvim-pack-lock.json` back into this checkout. Commit
+   lockfile bumps like any other dependency change.
+2. **Nix**, via `homeModules.default` in `flake.nix`, provisions the runtime
+   toolchain (LSP servers, formatters, ripgrep/fd, etc.) and symlinks this
+   checkout to `~/.config/nvim`. It does NOT vendor or pin plugins — that's
+   `vim.pack`'s job — so a Lua/plugin change only needs `git pull`, never a
+   Nix rebuild.
+
+On any machine with home-manager (standalone or via NixOS/nix-darwin), clone
+this repo to `~/coding/nvim` (or set `programs.nvim-cglavin.configPath`) and
+add the module:
+
+```nix
+{
+  inputs.nvim-cglavin.url = "github:cglavin50/nvim";
+  # home-manager module list:
+  #   inputs.nvim-cglavin.homeModules.default
+}
+```
+
+### Bootstrapping a machine with no existing home-manager (e.g. a fresh macOS box)
+
+Standalone home-manager needs no nix-darwin/NixOS:
+
+```nix
+# ~/.config/home-manager/flake.nix
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nvim-cglavin.url = "github:cglavin50/nvim";
+  };
+
+  outputs = {home-manager, nixpkgs, nvim-cglavin, ...}: {
+    homeConfigurations.default = home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs {system = "aarch64-darwin";};
+      modules = [
+        nvim-cglavin.homeModules.default
+        {
+          home.username = "cooper";
+          home.homeDirectory = "/Users/cooper";
+          home.stateVersion = "25.11";
+          programs.home-manager.enable = true;
+        }
+      ];
+    };
+  };
+}
+```
+
+then `git clone git@github.com:cglavin50/nvim.git ~/coding/nvim && nix run home-manager/master -- switch --flake ~/.config/home-manager`.
+

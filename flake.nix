@@ -2,79 +2,80 @@
   description = "My nvim configuration";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = {
     self,
     nixpkgs,
-    flake-utils,
   }: let
-    nixosModule = {pkgs, ...}: {
-      environment.systemPackages = [self.packages.${pkgs.system}.default];
-    };
+    supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
+    forEachSystem = nixpkgs.lib.genAttrs supportedSystems;
 
-    overlay = final: _prev: {
-      neovim-cglavin = self.packages.${final.system}.default;
-    };
-  in
-    flake-utils.lib.eachDefaultSystem (
-      system: let
-        pkgs = import nixpkgs {inherit system;};
+    # CLI tools the config's LSP/formatter/treesitter setup expects on $PATH.
+    # Plugins themselves are NOT listed here: vim.pack.add() (see lua/) owns
+    # plugin installation/pinning natively via nvim-pack-lock.json.
+    runtimeDeps = pkgs:
+      with pkgs; [
+        git
+        ripgrep
+        fd
+        gcc
+        gnumake
+        lua-language-server
+        nixd
+        pyright
+        nodejs_22
+        stylua
+      ];
 
-        configDir = pkgs.stdenv.mkDerivation {
-          name = "nvim-config";
-          src = ./.;
-          installPhase = ''
-            mkdir -p $out/nvim
-            cp init.lua $out/nvim/
-            cp -r lua $out/nvim/
+    homeModule = {
+      config,
+      lib,
+      pkgs,
+      ...
+    }: let
+      cfg = config.programs.nvim-cglavin;
+    in {
+      options.programs.nvim-cglavin = {
+        enable =
+          lib.mkEnableOption "cglavin's neovim configuration"
+          // {default = true;};
+        configPath = lib.mkOption {
+          type = lib.types.path;
+          default = "${config.home.homeDirectory}/coding/nvim";
+          description = ''
+            Path to the writable git checkout of this repo (NOT a nix store
+            path). vim.pack.add() writes nvim-pack-lock.json and clones
+            plugins directly into stdpath('config'), so ~/.config/nvim is
+            symlinked straight to this checkout rather than copied from the
+            store.
           '';
         };
+      };
 
-        runtimeDeps = with pkgs; [
-          git
-          ripgrep
-          fd
-          gcc
-          gnumake
-          lua-language-server
-          nixd
-          pyright
-          nodejs_22
-          stylua
-        ];
-
-        # vim.pack.add writes nvim-pack-lock.json into XDG_CONFIG_HOME/nvim,
-        # so we need a writable copy of the config. On first run (or after a
-        # flake update changes the store path), sync from the nix store into
-        # ~/.local/share/nvim-cglavin/nvim/ which is user-writable.
-        wrappedNvim = pkgs.writeShellScriptBin "nvim" ''
-          cfg_parent="''${XDG_DATA_HOME:-$HOME/.local/share}/nvim-cglavin"
-          cfg_dir="$cfg_parent/nvim"
-
-          if [[ ! -f "$cfg_dir/.nix-revision" ]] || \
-             [[ "$(cat "$cfg_dir/.nix-revision")" != "${configDir}" ]]; then
-            mkdir -p "$cfg_dir"
-            cp -rT "${configDir}/nvim" "$cfg_dir"
-            chmod -R u+w "$cfg_dir"
-            printf '%s' '${configDir}' > "$cfg_dir/.nix-revision"
-          fi
-
-          export PATH="${pkgs.lib.makeBinPath runtimeDeps}:$PATH"
-          export XDG_CONFIG_HOME="$cfg_parent"
-          exec ${pkgs.neovim-unwrapped}/bin/nvim "$@"
-        '';
-      in {
-        packages.default = wrappedNvim;
-        apps.default = {
-          type = "app";
-          program = "${wrappedNvim}/bin/nvim";
+      config = lib.mkIf cfg.enable {
+        programs.neovim = {
+          enable = true;
+          defaultEditor = true;
+          viAlias = true;
+          vimAlias = true;
+          vimdiffAlias = true;
         };
-      }
-    )
-    // {
-      nixosModules.default = nixosModule;
-      overlays.default = overlay;
+
+        home.packages = runtimeDeps pkgs;
+
+        xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink cfg.configPath;
+      };
     };
+  in {
+    homeModules.default = homeModule;
+
+    devShells = forEachSystem (system: let
+      pkgs = import nixpkgs {inherit system;};
+    in {
+      default = pkgs.mkShell {
+        packages = runtimeDeps pkgs;
+      };
+    });
+  };
 }
