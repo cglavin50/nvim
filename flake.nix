@@ -60,6 +60,13 @@
           viAlias = true;
           vimAlias = true;
           vimdiffAlias = true;
+
+          # home-manager's neovim module otherwise wants to own
+          # ~/.config/nvim/init.lua itself (for provider/wrapper lua),
+          # which collides with the whole-directory symlink below.
+          # sideloadInitLua injects that lua via a wrapper flag instead
+          # of writing a file, leaving init.lua entirely ours.
+          sideloadInitLua = true;
         };
 
         home.packages = runtimeDeps pkgs;
