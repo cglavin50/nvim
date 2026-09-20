@@ -62,6 +62,9 @@ local formatters = {
 
   -- Lua
   "stylua",
+
+  -- Nix
+  "alejandra",
 }
 
 -- install all servers + formatters/linters
@@ -85,6 +88,7 @@ require("conform").setup({
     typescriptreact = { "prettierd" },
     javascriptreact = { "prettierd" },
     javascript = { "prettierd" },
+    nix = { "alejandra" },
   },
 
   format_on_save = {

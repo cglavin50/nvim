@@ -14,6 +14,7 @@ local parsers = {
   "luadoc",
   "markdown",
   "markdown_inline",
+  "nix",
   "query",
   "vim",
   "vimdoc",

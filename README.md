@@ -38,6 +38,8 @@ add the module:
 }
 ```
 
+This is a rather obtuse way of working with neovim (installing, and linking) - however this allows me to use my lua configuration OOB on my nixos machines, while allowing me to use and edit my configuration on my work laptop (macos).
+
 ### Bootstrapping a machine with no existing home-manager (e.g. a fresh macOS box)
 
 Standalone home-manager needs no nix-darwin/NixOS:
@@ -72,4 +74,3 @@ Standalone home-manager needs no nix-darwin/NixOS:
 ```
 
 then `git clone git@github.com:cglavin50/nvim.git ~/coding/nvim && nix run home-manager/master -- switch --flake ~/.config/home-manager`.
-
