@@ -12,6 +12,8 @@ vim.pack.add({
 local servers = {
   elmls = {},
 
+  nil_ls = {},
+
   ts_ls = {},
 
   -- Special Lua Config, as recommended by neovim help docs

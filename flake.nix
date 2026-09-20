@@ -11,9 +11,12 @@
     supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
     forEachSystem = nixpkgs.lib.genAttrs supportedSystems;
 
-    # CLI tools the config's LSP/formatter/treesitter setup expects on $PATH.
-    # Plugins themselves are NOT listed here: vim.pack.add() (see lua/) owns
-    # plugin installation/pinning natively via nvim-pack-lock.json.
+    # CLI tools needed outside/independent of nvim's own LSP runtime:
+    # shell utilities, native compilers for treesitter parser builds, and
+    # stylua as a standalone formatter CLI. LSP servers/formatters that
+    # Mason already tracks via ensure_installed (see lua/config/lsp.lua)
+    # belong there, not here — avoids two managers installing the same
+    # binary under different paths.
     runtimeDeps = pkgs:
       with pkgs; [
         git
@@ -21,9 +24,6 @@
         fd
         gcc
         gnumake
-        lua-language-server
-        nixd
-        pyright
         nodejs_22
         stylua
       ];
