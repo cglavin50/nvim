@@ -9,6 +9,6 @@ require("plugins.dadbod")
 
 require("plugins.obsidian")
 
-require("plugins/indent")
+require("plugins.indent")
 
 -- require("plugins.eslint") -- TODO: requires additional configuration

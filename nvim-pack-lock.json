@@ -79,6 +79,10 @@
       "src": "https://github.com/obsidian-nvim/obsidian.nvim",
       "version": ">=0.0.0"
     },
+    "oh-lucy.nvim": {
+      "rev": "2d94e9b03efe4c50f4653b6f2b7b200d970fe1aa",
+      "src": "https://github.com/yazeed1s/oh-lucy.nvim"
+    },
     "plenary.nvim": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"

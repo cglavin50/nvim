@@ -27,14 +27,7 @@ vim.pack.add({
   "https://github.com/catppuccin/nvim",
   "https://github.com/EdenEast/nightfox.nvim",
   "https://github.com/projekt0n/github-nvim-theme",
-})
-
--- pre-work for catppuccin
-require("catppuccin").setup({
-  background = { -- :h background
-    light = "latte",
-    dark = "mocha",
-  },
+  "https://github.com/yazeed1s/oh-lucy.nvim"
 })
 
 -- Using before and after.
@@ -51,7 +44,7 @@ require("themery").setup({
       name = "Everforest Light",
       colorscheme = "everforest",
       before = [[
-        vim.g.everforest_background = "medium"
+        vim.g.everforest_background = "hard"
         vim.opt.background = "light"
       ]],
     },
@@ -76,6 +69,13 @@ require("themery").setup({
         vim.o.background = "dark"
       ]],
     },
+    {
+        name = "Oh Lucy",
+        colorscheme = "oh-lucy",
+        before = [[
+          vim.o.background = "dark"
+        ]]
+      }
   },
 })
 vim.keymap.set("n", "<leader>sT", "<cmd>Themery<CR>", { desc = "[S]earch [T]hemes (themary)" })
