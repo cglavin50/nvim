@@ -12,11 +12,13 @@
     forEachSystem = nixpkgs.lib.genAttrs supportedSystems;
 
     # CLI tools needed outside/independent of nvim's own LSP runtime:
-    # shell utilities, native compilers for treesitter parser builds, and
-    # stylua as a standalone formatter CLI. LSP servers/formatters that
-    # Mason already tracks via ensure_installed (see lua/config/lsp.lua)
-    # belong there, not here — avoids two managers installing the same
-    # binary under different paths.
+    # shell utilities, native build toolchains Mason shells out to when a
+    # package has no prebuilt release (treesitter parsers need a C
+    # compiler; nil_ls's Mason installer runs `cargo install` from
+    # source), and stylua as a standalone formatter CLI. LSP
+    # servers/formatters that Mason already tracks via ensure_installed
+    # (see lua/config/lsp.lua) belong there, not here — avoids two
+    # managers installing the same binary under different paths.
     runtimeDeps = pkgs:
       with pkgs; [
         git
@@ -24,6 +26,8 @@
         fd
         gcc
         gnumake
+        cargo
+        rustc
         nodejs_22
         stylua
       ];
