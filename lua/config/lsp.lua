@@ -18,6 +18,10 @@ local servers = {
 
   svelte = {},
 
+  tailwindcss = {},
+
+  emmet_language_server = {},
+
   -- Special Lua Config, as recommended by neovim help docs
   lua_ls = {
     on_init = function(client)
