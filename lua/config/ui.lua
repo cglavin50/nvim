@@ -26,8 +26,9 @@ vim.pack.add({
   "https://github.com/sainnhe/everforest",
   "https://github.com/catppuccin/nvim",
   "https://github.com/EdenEast/nightfox.nvim",
+  "https://github.com/nyoom-engineering/oxocarbon.nvim",
   "https://github.com/projekt0n/github-nvim-theme",
-  "https://github.com/yazeed1s/oh-lucy.nvim"
+  "https://github.com/yazeed1s/oh-lucy.nvim",
 })
 
 -- Using before and after.
@@ -70,12 +71,26 @@ require("themery").setup({
       ]],
     },
     {
-        name = "Oh Lucy",
-        colorscheme = "oh-lucy",
-        before = [[
+      name = "Oh Lucy",
+      colorscheme = "oh-lucy",
+      before = [[
           vim.o.background = "dark"
-        ]]
-      }
+        ]],
+    },
+    {
+      name = "OXO Carbon Light",
+      colorscheme = "oxocarbon",
+      before = [[
+        vim.o.background = "light"
+      ]],
+    },
+    {
+      name = "OXO Carbon Dark",
+      colorscheme = "oxocarbon",
+      before = [[
+        vim.o.background = "dark"
+      ]],
+    },
   },
 })
 vim.keymap.set("n", "<leader>sT", "<cmd>Themery<CR>", { desc = "[S]earch [T]hemes (themary)" })

@@ -10,8 +10,8 @@ vim.diagnostic.config({
   underline = { severity = { min = vim.diagnostic.severity.WARN } },
 
   -- Can switch between these as you prefer
-  virtual_text = false, -- Text shows up at the end of the line
-  virtual_lines = true, -- Text shows up underneath the line, with virtual lines
+  virtual_text = true, -- Text shows up at the end of the line
+  virtual_lines = false, -- Text shows up underneath the line, with virtual lines
 
   -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
   jump = {
@@ -24,7 +24,8 @@ vim.diagnostic.config({
     end,
   },
 })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist, { desc = "Open [D]iagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>dl", vim.diagnostic.open_float, { desc = "Show [D]iagnostics for this [L]ine" })
 
 vim.keymap.set("n", "j", function()
   return vim.v.count == 0 and "gj" or "j"
@@ -32,7 +33,7 @@ end, { expr = true, silent = true, desc = "Down (wrap-aware)" })
 vim.keymap.set("n", "k", function()
   return vim.v.count == 0 and "gk" or "k"
 end, { expr = true, silent = true, desc = "Up (wrap-aware)" })
-
+vim.keymap.set("n", "Q", "@q") -- replay latest macro
 -- TODO: configure tmux.nvim and combine keybinds
 
 vim.api.nvim_create_autocmd("TextYankPost", {

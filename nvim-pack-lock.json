@@ -13,6 +13,10 @@
       "rev": "016802de402556da54c36bd7359b441266b01cdd",
       "src": "https://github.com/stevearc/conform.nvim"
     },
+    "diffview.nvim": {
+      "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
+      "src": "https://github.com/sindrets/diffview.nvim"
+    },
     "everforest": {
       "rev": "85a86eb62409e3ec88713bff3d1b9d7374e112e4",
       "src": "https://github.com/sainnhe/everforest"
@@ -82,6 +86,10 @@
     "oh-lucy.nvim": {
       "rev": "2d94e9b03efe4c50f4653b6f2b7b200d970fe1aa",
       "src": "https://github.com/yazeed1s/oh-lucy.nvim"
+    },
+    "oxocarbon.nvim": {
+      "rev": "cd6523a0836d6e8ee823d343149fd06c7b71fdde",
+      "src": "https://github.com/nyoom-engineering/oxocarbon.nvim"
     },
     "plenary.nvim": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
